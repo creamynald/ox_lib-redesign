@@ -20,6 +20,8 @@ const useStyles = createStyles((theme) => ({
     right: '25%',
     width: 320,
     height: 580,
+    transform: 'rotate(-1.2deg)',
+    transformOrigin: 'top right',
   },
   header: {
     justifyContent: 'center',
@@ -30,12 +32,17 @@ const useStyles = createStyles((theme) => ({
   titleContainer: {
     borderRadius: 4,
     flex: '1 85%',
-    backgroundColor: theme.colors.dark[6],
+    backgroundColor: 'var(--ox-primary-color)',
   },
   titleText: {
     color: theme.colors.dark[0],
     padding: 6,
     textAlign: 'center',
+    fontFamily: 'Oswald, sans-serif',
+    fontWeight: 700,
+    fontSize: 18,
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
   },
   buttonsContainer: {
     height: 560,

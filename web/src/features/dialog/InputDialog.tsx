@@ -104,7 +104,29 @@ const InputDialog: React.FC = () => {
         closeOnEscape={fields.options?.allowCancel !== false}
         closeOnClickOutside={false}
         size={fields.options?.size || 'xs'}
-        styles={{ title: { textAlign: 'center', width: '100%', fontSize: 18 } }}
+        styles={{
+          title: {
+            textAlign: 'center',
+            width: '100%',
+            fontSize: 18,
+            fontFamily: 'Oswald, sans-serif',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            color: 'var(--ox-primary-color)',
+          },
+          modal: {
+            transform: 'rotate(-1.2deg)',
+            fontFamily: 'Oswald, sans-serif',
+            backgroundColor: 'var(--ox-secondary-color)',
+          },
+          header: {
+            backgroundColor: 'var(--ox-secondary-color)',
+          },
+          body: {
+            backgroundColor: 'var(--ox-secondary-color)',
+          },
+        }}
         title={fields.heading}
         withCloseButton={false}
         overlayOpacity={0.5}

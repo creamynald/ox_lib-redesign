@@ -20,8 +20,13 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     padding: 2,
     height: 60,
     scrollMargin: 8,
+    fontFamily: 'Oswald, sans-serif',
     '&:focus': {
-      backgroundColor: theme.colors.dark[4],
+      backgroundColor: 'var(--ox-primary-color)',
+      outline: 'none',
+    },
+    '&:hover': {
+      backgroundColor: 'var(--ox-primary-color)',
       outline: 'none',
     },
   },
@@ -46,8 +51,9 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   label: {
     color: theme.colors.dark[2],
     textTransform: 'uppercase',
-    fontSize: 12,
+    fontSize: 11,
     verticalAlign: 'middle',
+    fontFamily: 'Oswald, sans-serif',
   },
   chevronIcon: {
     fontSize: 14,

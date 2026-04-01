@@ -12,27 +12,32 @@ const useStyles = createStyles((theme) => ({
   container: {
     width: 300,
     height: 'fit-content',
-    backgroundColor: theme.colors.dark[6],
+    backgroundColor: 'var(--ox-secondary-color)',
     color: theme.colors.dark[0],
     padding: 12,
     borderRadius: theme.radius.sm,
-    fontFamily: 'Roboto',
+    fontFamily: 'Oswald, sans-serif',
     boxShadow: theme.shadows.sm,
+    borderLeft: '3px solid var(--ox-primary-color)',
   },
   title: {
-    fontWeight: 500,
+    fontWeight: 600,
     lineHeight: 'normal',
+    fontFamily: 'Oswald, sans-serif',
+    fontSize: 15,
+    textTransform: 'uppercase',
+    letterSpacing: '0.04em',
   },
   description: {
-    fontSize: 12,
+    fontSize: 13,
     color: theme.colors.dark[2],
-    fontFamily: 'Roboto',
+    fontFamily: 'Oswald, sans-serif',
     lineHeight: 'normal',
   },
   descriptionOnly: {
     fontSize: 14,
     color: theme.colors.dark[2],
-    fontFamily: 'Roboto',
+    fontFamily: 'Oswald, sans-serif',
     lineHeight: 'normal',
   },
 }));
@@ -87,21 +92,12 @@ const Notifications: React.FC = () => {
     const duration = data.duration || 3000;
 
     let iconColor: string;
-    let position = data.position || 'top-right';
+    // Force always top-right regardless of what Lua passes
+    const position = 'top-right';
 
     data.showDuration = data.showDuration !== undefined ? data.showDuration : true;
 
     if (toastId) setToastKey(prevKey => prevKey + 1);
-
-    // Backwards compat with old notifications
-    switch (position) {
-      case 'top':
-        position = 'top-center';
-        break;
-      case 'bottom':
-        position = 'bottom-center';
-        break;
-    }
 
     if (!data.icon) {
       switch (data.type) {
@@ -139,11 +135,15 @@ const Notifications: React.FC = () => {
       iconColor = tinycolor(data.iconColor).toRgbString();
     }
 
+    const isRight = position.includes('right');
+
     toast.custom(
       (t) => (
         <Box
           sx={{
             animation: getAnimation(t.visible, position),
+            transform: isRight ? 'rotate(-1.2deg)' : undefined,
+            transformOrigin: isRight ? 'top right' : undefined,
             ...data.style,
           }}
           className={`${classes.container}`}

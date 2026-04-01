@@ -28,8 +28,9 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     height: 'fit-content',
     width: '100%',
     padding: 10,
+    fontFamily: 'Oswald, sans-serif',
     '&:hover': {
-      backgroundColor: params.readOnly ? theme.colors.dark[6] : undefined,
+      backgroundColor: params.readOnly ? theme.colors.dark[6] : 'var(--ox-primary-color)',
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {
@@ -67,6 +68,10 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   },
   buttonTitleText: {
     overflowWrap: 'break-word',
+    textTransform: 'uppercase',
+    fontWeight: 600,
+    fontSize: 14,
+    letterSpacing: '0.04em',
   },
   buttonArrowContainer: {
     justifyContent: 'center',

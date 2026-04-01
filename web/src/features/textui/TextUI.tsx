@@ -25,11 +25,16 @@ const useStyles = createStyles((theme, params: { position?: TextUiPosition }) =>
     fontSize: 16,
     padding: 12,
     margin: 8,
-    backgroundColor: theme.colors.dark[6],
+    backgroundColor: 'var(--ox-secondary-color)',
     color: theme.colors.dark[0],
-    fontFamily: 'Roboto',
+    fontFamily: 'Oswald, sans-serif',
+    textTransform: 'uppercase',
+    letterSpacing: '0.04em',
     borderRadius: theme.radius.sm,
     boxShadow: theme.shadows.sm,
+    borderLeft: '3px solid var(--ox-primary-color)',
+    transform: params.position === 'right-center' ? 'rotate(-1.2deg)' : undefined,
+    transformOrigin: params.position === 'right-center' ? 'center right' : undefined,
   },
 }));
 
