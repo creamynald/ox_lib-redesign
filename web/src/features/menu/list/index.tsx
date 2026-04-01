@@ -13,7 +13,7 @@ const isRightPosition = (position?: MenuPosition) =>
 
 const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCount: number; selected: number }) => ({
   tooltip: {
-    backgroundColor: theme.colors.dark[6],
+    backgroundColor: 'var(--ox-item-bg)',
     color: theme.colors.dark[2],
     borderRadius: theme.radius.sm,
     maxWidth: 350,
@@ -39,12 +39,12 @@ const useStyles = createStyles((theme, params: { position?: MenuPosition; itemCo
     maxHeight: 415,
     overflow: 'hidden',
     borderRadius: params.itemCount <= 6 || params.selected === params.itemCount - 1 ? theme.radius.md : undefined,
-    backgroundColor: 'var(--ox-secondary-color)',
+    backgroundColor: 'var(--ox-bg-color)',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
   },
   scrollArrow: {
-    backgroundColor: 'var(--ox-secondary-color)',
+    backgroundColor: 'var(--ox-bg-color)',
     textAlign: 'center',
     borderBottomLeftRadius: theme.radius.md,
     borderBottomRightRadius: theme.radius.md,

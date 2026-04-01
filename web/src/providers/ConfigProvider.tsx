@@ -14,6 +14,13 @@ interface ConfigCtxValue {
   setConfig: (config: Config) => void;
 }
 
+const hexToRgba = (hex: string, alpha: number): string => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+};
+
 const ConfigCtx = createContext<{ config: Config; setConfig: (config: Config) => void } | null>(null);
 
 const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -29,9 +36,11 @@ const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
       setConfig(data);
       if (data.primaryHex) {
         document.documentElement.style.setProperty('--ox-primary-color', data.primaryHex);
+        document.documentElement.style.setProperty('--ox-primary-color-alpha', hexToRgba(data.primaryHex, 0.85));
       }
       if (data.secondaryHex) {
         document.documentElement.style.setProperty('--ox-secondary-color', data.secondaryHex);
+        document.documentElement.style.setProperty('--ox-bg-color', hexToRgba(data.secondaryHex, 0.82));
       }
     });
   }, []);

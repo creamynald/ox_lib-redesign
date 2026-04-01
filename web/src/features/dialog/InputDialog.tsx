@@ -55,7 +55,7 @@ const InputDialog: React.FC = () => {
                   : row.default && new Date(row.default).getTime()
                 : row.default
               : row.checked,
-        } || { value: null }
+        }
       );
       // Backwards compat with new Select data type
       if (row.type === 'select' || row.type === 'multi-select') {
@@ -108,23 +108,26 @@ const InputDialog: React.FC = () => {
           title: {
             textAlign: 'center',
             width: '100%',
-            fontSize: 18,
-            fontFamily: 'Oswald, sans-serif',
-            fontWeight: 700,
+            fontFamily: '"Oswald", sans-serif',
+            fontWeight: 600,
+            fontSize: 14,
             textTransform: 'uppercase',
-            letterSpacing: '0.05em',
+            letterSpacing: '1px',
+            lineHeight: 1.1,
             color: 'var(--ox-primary-color)',
           },
           modal: {
             transform: 'rotate(-1.2deg)',
-            fontFamily: 'Oswald, sans-serif',
-            backgroundColor: 'var(--ox-secondary-color)',
+            fontFamily: '"Oswald", sans-serif',
+            backgroundColor: 'var(--ox-bg-color)',
+            borderRadius: 2,
           },
           header: {
-            backgroundColor: 'var(--ox-secondary-color)',
+            backgroundColor: 'var(--ox-bg-color)',
+            paddingBottom: 8,
           },
           body: {
-            backgroundColor: 'var(--ox-secondary-color)',
+            backgroundColor: 'var(--ox-bg-color)',
           },
         }}
         title={fields.heading}

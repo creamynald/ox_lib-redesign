@@ -291,7 +291,10 @@
 
 :root {
   --ox-primary-color: #32a1ce;
+  --ox-primary-color-alpha: rgba(50, 161, 206, 0.85);
   --ox-secondary-color: #1a4f5a;
+  --ox-bg-color: rgba(26, 79, 90, 0.82);
+  --ox-item-bg: rgba(37, 38, 43, 0.78);
 }
 
 html {

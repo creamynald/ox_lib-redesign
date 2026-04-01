@@ -15,12 +15,12 @@ interface Props {
 
 const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
   buttonContainer: {
-    backgroundColor: theme.colors.dark[6],
-    borderRadius: theme.radius.md,
-    padding: 2,
+    backgroundColor: 'var(--ox-item-bg)',
+    borderRadius: theme.radius.sm,
+    padding: '0 2px',
     height: 60,
     scrollMargin: 8,
-    fontFamily: 'Oswald, sans-serif',
+    fontFamily: '"Oswald", sans-serif',
     '&:focus': {
       backgroundColor: 'var(--ox-primary-color)',
       outline: 'none',
@@ -31,38 +31,44 @@ const useStyles = createStyles((theme, params: { iconColor?: string }) => ({
     },
   },
   iconImage: {
-    maxWidth: 32,
+    maxWidth: 22,
   },
   buttonWrapper: {
-    paddingLeft: 5,
-    paddingRight: 12,
+    paddingLeft: 8,
+    paddingRight: 10,
     height: '100%',
   },
   iconContainer: {
     display: 'flex',
     alignItems: 'center',
-    width: 32,
-    height: 32,
+    width: 22,
+    height: 22,
   },
   icon: {
-    fontSize: 24,
+    fontSize: 16,
     color: params.iconColor || theme.colors.dark[2],
   },
   label: {
     color: theme.colors.dark[2],
     textTransform: 'uppercase',
-    fontSize: 11,
-    verticalAlign: 'middle',
-    fontFamily: 'Oswald, sans-serif',
+    fontSize: 12,
+    fontFamily: '"Oswald", sans-serif',
+    fontWeight: 500,
+    letterSpacing: '1px',
+    lineHeight: 1.2,
   },
   chevronIcon: {
-    fontSize: 14,
+    fontSize: 12,
     color: theme.colors.dark[2],
   },
   scrollIndexValue: {
     color: theme.colors.dark[2],
     textTransform: 'uppercase',
-    fontSize: 14,
+    fontFamily: '"Oswald", sans-serif',
+    fontSize: 13,
+    fontWeight: 500,
+    letterSpacing: '1px',
+    lineHeight: 1.1,
   },
   progressStack: {
     width: '100%',
@@ -124,7 +130,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
           </Group>
         ) : item.checked !== undefined ? (
           <Group position="apart" w="100%">
-            <Text>{item.label}</Text>
+            <Text sx={{ fontFamily: '"Oswald", sans-serif', fontSize: 15, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px', lineHeight: 1.2 }}>{item.label}</Text>
             <CustomCheckbox checked={checked}></CustomCheckbox>
           </Group>
         ) : item.progress !== undefined ? (
@@ -137,7 +143,7 @@ const ListItem = forwardRef<Array<HTMLDivElement | null>, Props>(({ item, index,
             />
           </Stack>
         ) : (
-          <Text>{item.label}</Text>
+          <Text sx={{ fontFamily: '"Oswald", sans-serif', fontSize: 15, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '1px', lineHeight: 1.2 }}>{item.label}</Text>
         )}
       </Group>
     </Box>

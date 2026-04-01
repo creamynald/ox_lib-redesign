@@ -14,11 +14,12 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'center',
   },
   heading: {
-    fontSize: 22,
+    fontSize: 18,
     textTransform: 'uppercase',
-    fontWeight: 700,
-    fontFamily: 'Oswald, sans-serif',
-    letterSpacing: '0.05em',
+    fontWeight: 600,
+    fontFamily: '"Oswald", sans-serif',
+    letterSpacing: '1px',
+    lineHeight: 1.2,
   },
 }));
 

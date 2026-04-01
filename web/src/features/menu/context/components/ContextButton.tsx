@@ -27,10 +27,11 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
   button: {
     height: 'fit-content',
     width: '100%',
-    padding: 10,
-    fontFamily: 'Oswald, sans-serif',
+    padding: '10px 14px',
+    fontFamily: '"Oswald", sans-serif',
+    backgroundColor: 'var(--ox-item-bg)',
     '&:hover': {
-      backgroundColor: params.readOnly ? theme.colors.dark[6] : 'var(--ox-primary-color)',
+      backgroundColor: params.readOnly ? 'var(--ox-item-bg)' : 'var(--ox-primary-color-alpha)',
       cursor: params.readOnly ? 'unset' : 'pointer',
     },
     '&:active': {
@@ -38,46 +39,56 @@ const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: 
     },
   },
   iconImage: {
-    maxWidth: '25px',
+    maxWidth: '18px',
   },
   description: {
     color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
-    fontSize: 12,
+    fontFamily: '"Oswald", sans-serif',
+    fontSize: 13,
+    fontWeight: 400,
+    letterSpacing: '0.5px',
+    lineHeight: 1.2,
+    textTransform: 'none',
   },
   dropdown: {
-    padding: 10,
+    padding: 8,
     color: theme.colors.dark[0],
-    fontSize: 14,
+    fontFamily: '"Oswald", sans-serif',
+    fontSize: 13,
     maxWidth: 256,
     width: 'fit-content',
     border: 'none',
   },
   buttonStack: {
-    gap: 4,
+    gap: 2,
     flex: '1',
   },
   buttonGroup: {
-    gap: 4,
+    gap: 8,
     flexWrap: 'nowrap',
+    alignItems: 'center',
   },
   buttonIconContainer: {
-    width: 25,
-    height: 25,
+    width: 22,
+    height: 22,
     justifyContent: 'center',
     alignItems: 'center',
+    flexShrink: 0,
   },
   buttonTitleText: {
     overflowWrap: 'break-word',
+    fontFamily: '"Oswald", sans-serif',
     textTransform: 'uppercase',
-    fontWeight: 600,
-    fontSize: 14,
-    letterSpacing: '0.04em',
+    fontWeight: 500,
+    fontSize: 15,
+    letterSpacing: '1px',
+    lineHeight: 1.2,
   },
   buttonArrowContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 25,
-    height: 25,
+    width: 22,
+    height: 22,
   },
 }));
 
@@ -112,21 +123,26 @@ const ContextButton: React.FC<{
               <Stack className={classes.buttonStack}>
                 {(button.title || Number.isNaN(+buttonKey)) && (
                   <Group className={classes.buttonGroup}>
-                    {button?.icon && (
-                      <Stack className={classes.buttonIconContainer}>
-                        {typeof button.icon === 'string' && isIconUrl(button.icon) ? (
+                    <Stack className={classes.buttonIconContainer}>
+                      {button?.icon ? (
+                        typeof button.icon === 'string' && isIconUrl(button.icon) ? (
                           <img src={button.icon} className={classes.iconImage} alt="Missing img" />
                         ) : (
                           <LibIcon
                             icon={button.icon as IconProp}
                             fixedWidth
-                            size="lg"
-                            style={{ color: button.iconColor }}
+                            style={{ color: button.iconColor, fontSize: 13 }}
                             animation={button.iconAnimation}
                           />
-                        )}
-                      </Stack>
-                    )}
+                        )
+                      ) : (
+                        <LibIcon
+                          icon={'angle-right' as IconProp}
+                          fixedWidth
+                          style={{ color: button.disabled ? '#5c5f66' : '#5c5f66', fontSize: 11 }}
+                        />
+                      )}
+                    </Stack>
                     <Text className={classes.buttonTitleText}>
                       <ReactMarkdown components={MarkdownComponents}>{button.title || buttonKey}</ReactMarkdown>
                     </Text>
