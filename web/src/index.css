@@ -289,6 +289,20 @@
   font-stretch: normal;
 }
 
+.ox-corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-style: solid;
+  border-color: var(--ox-primary-color);
+  pointer-events: none;
+  z-index: 10;
+}
+.ox-corner.tl { top: -1px;    left: -1px;  border-width: 3px 0 0 3px; border-top-left-radius:     2px; }
+.ox-corner.tr { top: -1px;    right: -1px; border-width: 3px 3px 0 0; border-top-right-radius:    2px; }
+.ox-corner.bl { bottom: -1px; left: -1px;  border-width: 0 0 3px 3px; border-bottom-left-radius:  2px; }
+.ox-corner.br { bottom: -1px; right: -1px; border-width: 0 3px 3px 0; border-bottom-right-radius: 2px; }
+
 :root {
   --ox-primary-color: #32a1ce;
   --ox-primary-color-alpha: rgba(50, 161, 206, 0.85);

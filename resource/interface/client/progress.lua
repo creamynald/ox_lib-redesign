@@ -167,6 +167,64 @@ end
 ---@param data ProgressProps
 ---@return boolean?
 function lib.progressBar(data)
+    if GetResourceState('tehbotolxesse_lib') == 'started' then
+        local ped  = cache.ped
+        local anim = data.anim
+        local dis  = data.disable
+
+        if interruptProgress(data) then return false end
+
+        playerState.invBusy = true
+
+        if anim then
+            if anim.dict then
+                lib.requestAnimDict(anim.dict)
+                TaskPlayAnim(ped, anim.dict, anim.clip,
+                    anim.blendIn or 3.0, anim.blendOut or 1.0,
+                    anim.duration or -1, anim.flag or 49,
+                    anim.playbackRate or 0,
+                    anim.lockX, anim.lockY, anim.lockZ)
+                RemoveAnimDict(anim.dict)
+            elseif anim.scenario then
+                TaskStartScenarioInPlace(ped, anim.scenario, 0,
+                    anim.playEnter == nil or anim.playEnter)
+            end
+        end
+
+        local _done = false
+        Citizen.CreateThread(function()
+            while not _done do
+                if interruptProgress(data) then
+                    pcall(function() exports['tehbotolxesse_lib']:CancelProgress() end)
+                    break
+                end
+                Wait(200)
+            end
+        end)
+
+        local ok, result = pcall(function()
+            return exports['tehbotolxesse_lib']:Progress(
+                data.label or 'Processing...',
+                tonumber(data.duration) or 5000,
+                { canCancel = data.canCancel ~= false, disable = dis }
+            )
+        end)
+
+        _done            = true
+        playerState.invBusy = false
+
+        if anim then
+            if anim.dict then
+                StopAnimTask(ped, anim.dict, anim.clip, 1.0)
+                Wait(0)
+            else
+                ClearPedTasks(ped)
+            end
+        end
+
+        if ok and result ~= nil then return result end
+    end
+
     while progress ~= nil do Wait(0) end
 
     if not interruptProgress(data) then
@@ -185,6 +243,64 @@ end
 ---@param data ProgressProps
 ---@return boolean?
 function lib.progressCircle(data)
+    if GetResourceState('tehbotolxesse_lib') == 'started' then
+        local ped  = cache.ped
+        local anim = data.anim
+        local dis  = data.disable
+
+        if interruptProgress(data) then return false end
+
+        playerState.invBusy = true
+
+        if anim then
+            if anim.dict then
+                lib.requestAnimDict(anim.dict)
+                TaskPlayAnim(ped, anim.dict, anim.clip,
+                    anim.blendIn or 3.0, anim.blendOut or 1.0,
+                    anim.duration or -1, anim.flag or 49,
+                    anim.playbackRate or 0,
+                    anim.lockX, anim.lockY, anim.lockZ)
+                RemoveAnimDict(anim.dict)
+            elseif anim.scenario then
+                TaskStartScenarioInPlace(ped, anim.scenario, 0,
+                    anim.playEnter == nil or anim.playEnter)
+            end
+        end
+
+        local _done = false
+        Citizen.CreateThread(function()
+            while not _done do
+                if interruptProgress(data) then
+                    pcall(function() exports['tehbotolxesse_lib']:CancelProgress() end)
+                    break
+                end
+                Wait(200)
+            end
+        end)
+
+        local ok, result = pcall(function()
+            return exports['tehbotolxesse_lib']:Progress(
+                data.label or 'Processing...',
+                tonumber(data.duration) or 5000,
+                { canCancel = data.canCancel ~= false, disable = dis }
+            )
+        end)
+
+        _done               = true
+        playerState.invBusy = false
+
+        if anim then
+            if anim.dict then
+                StopAnimTask(ped, anim.dict, anim.clip, 1.0)
+                Wait(0)
+            else
+                ClearPedTasks(ped)
+            end
+        end
+
+        if ok and result ~= nil then return result end
+    end
+
     while progress ~= nil do Wait(0) end
 
     if not interruptProgress(data) then
@@ -202,6 +318,13 @@ function lib.progressCircle(data)
 end
 
 function lib.cancelProgress()
+    if GetResourceState('tehbotolxesse_lib') == 'started' then
+        local ok, cancelled = pcall(function()
+            return exports['tehbotolxesse_lib']:CancelProgress()
+        end)
+        if ok and cancelled then return end
+    end
+
     if not progress then
         error('No progress bar is active')
     end
@@ -211,6 +334,13 @@ end
 
 ---@return boolean
 function lib.progressActive()
+    if GetResourceState('tehbotolxesse_lib') == 'started' then
+        local ok, active = pcall(function()
+            return exports['tehbotolxesse_lib']:ProgressActive()
+        end)
+        if ok and active ~= nil then return active end
+    end
+
     return progress and true
 end
 

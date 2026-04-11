@@ -100,39 +100,60 @@ const InputDialog: React.FC = () => {
       <Modal
         opened={visible}
         onClose={handleClose}
-        centered
         closeOnEscape={fields.options?.allowCancel !== false}
         closeOnClickOutside={false}
         size={fields.options?.size || 'xs'}
         styles={{
+          root: {
+            pointerEvents: 'none',
+          },
+          inner: {
+            alignItems: 'flex-start',
+            justifyContent: 'flex-end',
+            paddingTop: '15%',
+            paddingRight: '25%',
+            paddingLeft: 0,
+            paddingBottom: 0,
+            background: 'transparent',
+            pointerEvents: 'none',
+          },
+          overlay: {
+            display: 'none',
+          },
           title: {
             textAlign: 'center',
             width: '100%',
             fontFamily: '"Oswald", sans-serif',
             fontWeight: 600,
-            fontSize: 14,
+            fontSize: 16,
             textTransform: 'uppercase',
             letterSpacing: '1px',
-            lineHeight: 1.1,
-            color: 'var(--ox-primary-color)',
+            lineHeight: 1.2,
+            color: '#ffffff',
           },
           modal: {
+            width: 360,
             transform: 'rotate(-1.2deg)',
+            transformOrigin: 'top right',
             fontFamily: '"Oswald", sans-serif',
             backgroundColor: 'var(--ox-bg-color)',
             borderRadius: 2,
+            padding: 0,
+            pointerEvents: 'all',
           },
           header: {
-            backgroundColor: 'var(--ox-bg-color)',
-            paddingBottom: 8,
+            backgroundColor: 'var(--ox-primary-color)',
+            padding: '10px 14px',
+            borderRadius: '2px 2px 0 0',
           },
           body: {
-            backgroundColor: 'var(--ox-bg-color)',
+            backgroundColor: 'transparent',
+            padding: '14px',
           },
         }}
         title={fields.heading}
         withCloseButton={false}
-        overlayOpacity={0.5}
+        overlayOpacity={0}
         transition="fade"
         exitTransitionDuration={150}
       >
@@ -176,17 +197,40 @@ const InputDialog: React.FC = () => {
                 </React.Fragment>
               );
             })}
-            <Group position="right" spacing={10}>
+            <Group position="right" spacing={8} mt={4}>
               <Button
                 uppercase
                 variant="default"
                 onClick={() => handleClose()}
-                mr={3}
                 disabled={fields.options?.allowCancel === false}
+                styles={{
+                  root: {
+                    backgroundColor: 'var(--ox-item-bg)',
+                    fontFamily: '"Oswald", sans-serif',
+                    fontSize: 13,
+                    letterSpacing: '1px',
+                    fontWeight: 500,
+                    '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' },
+                  },
+                }}
               >
                 {locale.ui.cancel}
               </Button>
-              <Button uppercase variant="light" type="submit">
+              <Button
+                uppercase
+                type="submit"
+                styles={{
+                  root: {
+                    backgroundColor: 'var(--ox-primary-color)',
+                    fontFamily: '"Oswald", sans-serif',
+                    fontSize: 13,
+                    letterSpacing: '1px',
+                    fontWeight: 500,
+                    color: '#fff',
+                    '&:hover': { backgroundColor: 'var(--ox-primary-color-alpha)' },
+                  },
+                }}
+              >
                 {locale.ui.confirm}
               </Button>
             </Group>

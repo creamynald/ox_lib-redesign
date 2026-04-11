@@ -15,82 +15,96 @@ const clickContext = (id: string) => {
   fetchNui('clickContext', id);
 };
 
-const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: boolean }) => ({
-  inner: {
-    justifyContent: 'flex-start',
-  },
-  label: {
-    width: '100%',
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[0],
-    whiteSpace: 'pre-wrap',
-  },
-  button: {
-    height: 'fit-content',
-    width: '100%',
-    padding: '10px 14px',
-    fontFamily: '"Oswald", sans-serif',
-    backgroundColor: 'var(--ox-item-bg)',
-    '&:hover': {
-      backgroundColor: params.readOnly ? 'var(--ox-item-bg)' : 'var(--ox-primary-color-alpha)',
-      cursor: params.readOnly ? 'unset' : 'pointer',
+const useStyles = createStyles((theme, params: { disabled?: boolean; readOnly?: boolean }, getRef) => {
+  const descriptionRef = getRef('description');
+  const titleRef = getRef('buttonTitleText');
+  return {
+    inner: {
+      justifyContent: 'flex-start',
     },
-    '&:active': {
-      transform: params.readOnly ? 'unset' : undefined,
+    label: {
+      width: '100%',
+      color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[0],
+      whiteSpace: 'pre-wrap',
     },
-  },
-  iconImage: {
-    maxWidth: '18px',
-  },
-  description: {
-    color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
-    fontFamily: '"Oswald", sans-serif',
-    fontSize: 13,
-    fontWeight: 400,
-    letterSpacing: '0.5px',
-    lineHeight: 1.2,
-    textTransform: 'none',
-  },
-  dropdown: {
-    padding: 8,
-    color: theme.colors.dark[0],
-    fontFamily: '"Oswald", sans-serif',
-    fontSize: 13,
-    maxWidth: 256,
-    width: 'fit-content',
-    border: 'none',
-  },
-  buttonStack: {
-    gap: 2,
-    flex: '1',
-  },
-  buttonGroup: {
-    gap: 8,
-    flexWrap: 'nowrap',
-    alignItems: 'center',
-  },
-  buttonIconContainer: {
-    width: 22,
-    height: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexShrink: 0,
-  },
-  buttonTitleText: {
-    overflowWrap: 'break-word',
-    fontFamily: '"Oswald", sans-serif',
-    textTransform: 'uppercase',
-    fontWeight: 500,
-    fontSize: 15,
-    letterSpacing: '1px',
-    lineHeight: 1.2,
-  },
-  buttonArrowContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 22,
-    height: 22,
-  },
-}));
+    button: {
+      height: 'fit-content',
+      width: '100%',
+      padding: '10px 14px',
+      fontFamily: '"Oswald", sans-serif',
+      backgroundColor: 'var(--ox-item-bg)',
+      [`&:hover .${descriptionRef}`]: {
+        color: 'rgba(255,255,255,0.85)',
+      },
+      [`&:hover .${titleRef}`]: {
+        color: '#ffffff',
+        textShadow: '0 1px 3px rgba(0,0,0,0.4)',
+      },
+      '&:hover': {
+        backgroundColor: params.readOnly ? 'var(--ox-item-bg)' : 'var(--ox-primary-color-alpha)',
+        cursor: params.readOnly ? 'unset' : 'pointer',
+      },
+      '&:active': {
+        transform: params.readOnly ? 'unset' : undefined,
+      },
+    },
+    iconImage: {
+      maxWidth: '18px',
+    },
+    description: {
+      ref: descriptionRef,
+      color: params.disabled ? theme.colors.dark[3] : theme.colors.dark[2],
+      fontFamily: '"Oswald", sans-serif',
+      fontSize: 13,
+      fontWeight: 400,
+      letterSpacing: '0.5px',
+      lineHeight: 1.2,
+      textTransform: 'none' as const,
+    },
+    dropdown: {
+      padding: 8,
+      color: theme.colors.dark[0],
+      fontFamily: '"Oswald", sans-serif',
+      fontSize: 13,
+      maxWidth: 256,
+      width: 'fit-content',
+      border: 'none',
+    },
+    buttonStack: {
+      gap: 2,
+      flex: '1',
+    },
+    buttonGroup: {
+      gap: 8,
+      flexWrap: 'nowrap' as const,
+      alignItems: 'center',
+    },
+    buttonIconContainer: {
+      width: 22,
+      height: 22,
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexShrink: 0,
+    },
+    buttonTitleText: {
+      ref: titleRef,
+      overflowWrap: 'break-word' as const,
+      fontFamily: '"Oswald", sans-serif',
+      textTransform: 'uppercase' as const,
+      fontWeight: 600,
+      fontSize: 15,
+      letterSpacing: '1px',
+      lineHeight: 1.2,
+      color: params.disabled ? theme.colors.dark[3] : '#ffffff',
+    },
+    buttonArrowContainer: {
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: 22,
+      height: 22,
+    },
+  };
+});
 
 const ContextButton: React.FC<{
   option: [string, Option];

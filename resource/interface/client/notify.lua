@@ -31,6 +31,18 @@ local settings = require 'resource.settings'
 ---@param data NotifyProps
 ---@diagnostic disable-next-line: duplicate-set-field
 function lib.notify(data)
+    if GetResourceState('tehbotolxesse_lib') == 'started' then
+        local ok = pcall(function()
+            exports['tehbotolxesse_lib']:Notify(
+                data.type or 'info',
+                data.title or '',
+                data.description or '',
+                tonumber(data.duration) or 4000
+            )
+        end)
+        if ok then return end
+    end
+
     local sound = settings.notification_audio and data.sound
     data.sound = nil
     data.position = data.position or settings.notification_position
